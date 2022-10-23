@@ -1,5 +1,6 @@
 <script lang="ts">
     import Block from '$lib/components/block.svelte'
+    import { onDestroy } from 'svelte';
 
     const WIDTH = 30
     const HEIGHT = 30
@@ -25,6 +26,21 @@
             board[segment.y][segment.x] = 'segment'
         }
     }
+
+    let gameLoop = setInterval(() => {
+        let head = body.at(-1)!
+
+        if (head.y + 1 < HEIGHT) {
+            head.y += 1
+        }
+
+        render()
+    }, 1000)
+
+    onDestroy(() => {
+        clearInterval(gameLoop)
+    })
+
     render()
     
 
