@@ -4,14 +4,29 @@
     const WIDTH = 20
     const HEIGHT = 20
 
+    let board : Array<Array<'block' | 'segment' | 'fruit'>> = []
+
+    function render() {
+        board = []
+        for (let i = 0; i < HEIGHT; i++) {
+            const row : Array<'block' | 'segment' | 'fruit'> = []
+            for (let j = 0; j < WIDTH; j++) {
+                row.push('block')
+            }
+            board.push(row)
+        }
+    }
+    render()
+    
+
 </script>
 
 <div class="container">
     <div class="board">
-        {#each new Array(HEIGHT) as row}
-            {#each new Array(WIDTH) as block}
+        {#each board as row}
+            {#each row as block}
                 <div class="block-container">
-                    <Block />
+                    <Block type={block}/>
                 </div>
             {/each}
             <br>
