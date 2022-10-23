@@ -1,8 +1,8 @@
 <script lang="ts">
     import Block from '$lib/components/block.svelte'
 
-    const WIDTH = 20
-    const HEIGHT = 20
+    const WIDTH = 30
+    const HEIGHT = 30
 
     let board : Array<Array<'block' | 'segment' | 'fruit'>> = []
 
