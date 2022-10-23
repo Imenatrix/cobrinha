@@ -6,6 +6,11 @@
 
     let board : Array<Array<'block' | 'segment' | 'fruit'>> = []
 
+    const body = [{
+        x : Math.floor(WIDTH / 2),
+        y : Math.floor(HEIGHT / 2)
+    }]
+
     function render() {
         board = []
         for (let i = 0; i < HEIGHT; i++) {
@@ -14,6 +19,10 @@
                 row.push('block')
             }
             board.push(row)
+        }
+
+        for (let segment of body) {
+            board[segment.y][segment.x] = 'segment'
         }
     }
     render()
