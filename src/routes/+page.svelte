@@ -1,6 +1,6 @@
 <script lang="ts">
     import Block from '$lib/components/block.svelte'
-    import { onDestroy } from 'svelte';
+    import { onDestroy, onMount } from 'svelte';
 
     const WIDTH = 30
     const HEIGHT = 30
@@ -48,8 +48,26 @@
         render()
     }, 1000)
 
-    onDestroy(() => {
-        clearInterval(gameLoop)
+    onMount(async () => {
+        document.addEventListener('keydown', (event) => {
+            if (event.key == 'ArrowUp') {
+                movement.x = 0
+                movement.y = -1
+            }
+            if (event.key == 'ArrowDown') {
+                movement.x = 0
+                movement.y = 1
+            }
+            if (event.key == 'ArrowRight') {
+                movement.x = 1
+                movement.y = 0
+            }
+            if (event.key == 'ArrowLeft') {
+                movement.x = -1
+                movement.y = 0
+            }
+            console.log(event.key)
+        })
     })
 
     render()
