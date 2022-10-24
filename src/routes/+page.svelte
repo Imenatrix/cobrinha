@@ -35,8 +35,14 @@
     let gameLoop = setInterval(() => {
         let head = body.at(-1)!
 
-        if (head.y + 1 < HEIGHT) {
-            head.y += 1
+        if (
+            head.x > 0 &&
+            head.y > 0 &&
+            head.x < WIDTH - 1 &&
+            head.y < HEIGHT - 1
+        ) {
+            head.x += movement.x
+            head.y += movement.y
         }
 
         render()
