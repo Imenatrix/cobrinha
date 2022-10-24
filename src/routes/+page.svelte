@@ -7,6 +7,11 @@
 
     let board : Array<Array<'block' | 'segment' | 'fruit'>> = []
 
+    const movement = {
+        x : 1,
+        y : 0
+    }
+
     const body = [{
         x : Math.floor(WIDTH / 2),
         y : Math.floor(HEIGHT / 2)
