@@ -12,6 +12,8 @@
         y : 0
     }
 
+    let fruit : {x : number, y : number} | null = null
+
     const body = [{
         x : Math.floor(WIDTH / 2),
         y : Math.floor(HEIGHT / 2)
@@ -25,6 +27,10 @@
                 row.push('block')
             }
             board.push(row)
+        }
+
+        if (fruit != null) {
+            board[fruit.y][fruit.x] = 'fruit'
         }
 
         for (let segment of body) {
@@ -41,8 +47,31 @@
             head.x + movement.x <= WIDTH - 1 &&
             head.y + movement.y <= HEIGHT - 1
         ) {
-            head.x += movement.x
-            head.y += movement.y
+            body.push({
+                x : head.x + movement.x,
+                y : head.y + movement.y
+            })
+
+            head = body.at(-1)!
+            if (fruit != null) {
+                if (head.x == fruit.x && head.y == fruit.y) {
+                    fruit = null
+                }
+                else {
+                    body.shift()
+                }
+            }
+            else {
+                body.shift()
+            }
+
+        }
+
+        if (fruit == null) {
+            fruit = {
+                x : Math.floor(Math.random() * WIDTH),
+                y : Math.floor(Math.random() * HEIGHT)
+            }
         }
 
         render()
