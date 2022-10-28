@@ -67,10 +67,19 @@
 
         }
 
-        if (fruit == null) {
+        frootLoop: while (fruit == null) {
+            let x = Math.floor(Math.random() * WIDTH)
+            let y = Math.floor(Math.random() * HEIGHT)
+
+            for (let segment of body) {
+                if (segment.x == x && segment.y == y) {
+                    continue frootLoop
+                }
+            }
+
             fruit = {
-                x : Math.floor(Math.random() * WIDTH),
-                y : Math.floor(Math.random() * HEIGHT)
+                x : x,
+                y : y
             }
         }
 
@@ -95,7 +104,6 @@
                 movement.x = -1
                 movement.y = 0
             }
-            console.log(event.key)
         })
     })
 
