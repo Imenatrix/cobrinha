@@ -2,8 +2,8 @@
     import Block from '$lib/components/block.svelte'
     import { onDestroy, onMount } from 'svelte';
 
-    const WIDTH = 30
-    const HEIGHT = 30
+    const WIDTH = 5
+    const HEIGHT = 5
 
     let gameOver = false
 
@@ -72,14 +72,12 @@
             gameOver = true
         }
 
-        frootLoop: while (fruit == null) {
+        while (fruit == null) {
             let x = Math.floor(Math.random() * WIDTH)
             let y = Math.floor(Math.random() * HEIGHT)
 
-            for (let segment of body) {
-                if (segment.x == x && segment.y == y) {
-                    continue frootLoop
-                }
+            if (isOnBody(x, y)) {
+                continue
             }
 
             fruit = {
@@ -90,6 +88,14 @@
 
         render()
     }, 500)
+
+    function isOnBody(x : number, y : number) {
+        for (let segment of body) {
+            if (segment.x == x && segment.y == y) {
+                return true
+            }
+        }
+    }
 
     onMount(async () => {
         document.addEventListener('keydown', (event) => {
