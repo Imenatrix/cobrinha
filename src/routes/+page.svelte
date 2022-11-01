@@ -5,6 +5,8 @@
     const WIDTH = 30
     const HEIGHT = 30
 
+    let gameOver = false
+
     let board : Array<Array<'block' | 'segment' | 'fruit'>> = []
 
     const movement = {
@@ -66,6 +68,9 @@
             }
 
         }
+        else {
+            gameOver = true
+        }
 
         frootLoop: while (fruit == null) {
             let x = Math.floor(Math.random() * WIDTH)
@@ -113,6 +118,9 @@
 </script>
 
 <div class="container">
+    <div class="overlay" class:overlay-hidden={!gameOver}>
+        Game Over
+    </div>
     <div class="board">
         {#each board as row}
             {#each row as block}
@@ -132,6 +140,20 @@
         align-items: center;
         height: 100vh;
         widows: 100vw;
+    }
+    .overlay {
+        font-size: 75px;
+        display: flex;
+        position: absolute;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .overlay-hidden {
+        visibility: hidden;
     }
     .block-container {
         display: inline-block;
