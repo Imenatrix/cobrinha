@@ -2,8 +2,8 @@
     import Block from '$lib/components/block.svelte'
     import { onDestroy, onMount } from 'svelte';
 
-    const WIDTH = 5
-    const HEIGHT = 5
+    const WIDTH = 10
+    const HEIGHT = 10
 
     let gameOver = false
 
@@ -43,11 +43,15 @@
     let gameLoop = setInterval(() => {
         let head = body.at(-1)!
 
+        const newX = head.x + movement.x
+        const newY = head.y + movement.y
+
         if (
-            head.x + movement.x >= 0 &&
-            head.y + movement.y >= 0 &&
-            head.x + movement.x <= WIDTH - 1 &&
-            head.y + movement.y <= HEIGHT - 1
+            newX >= 0 &&
+            newY >= 0 &&
+            newX <= WIDTH - 1 &&
+            newY <= HEIGHT - 1 &&
+            !isOnBody(newX, newY)
         ) {
             body.push({
                 x : head.x + movement.x,
